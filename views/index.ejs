@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <% blogs.map(function(blog){ %>
+        <div style="border-bottom: 1px solid rgb(42, 42, 42);">
+            <h3><%= blog.title %></h3>
+            <div><%= blog.body %></div>
+        </div>
+    <% }); %>
+</body>
+</html>
