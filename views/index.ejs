@@ -4,14 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <%- include('style') -%>
 </head>
 <body>
-
-    <% blogs.map(function(blog){ %>
-        <div style="border-bottom: 1px solid rgb(42, 42, 42);">
-            <h3><%= blog.title %></h3>
-            <div><%= blog.body %></div>
+    <div class="container">
+        <div>
+            <h1 style="text-align: center; font-weight: bold;">Blogs...</h1>
         </div>
-    <% }); %>
+        <div>
+        <% blogs.map(function(blog,index){ %>
+            <div class="blog-item">
+                <h3>
+                <div class="b_item">
+                    <div>
+                        <a href="/blog/<%= blog.id %>">
+                            <%= index+1 %> <%= blog.title %>
+                        </a>
+                    </div>
+                    <div class="dateandtime">
+                        <%= blog.dateandtime %>
+                    </div>
+
+                </div>
+                
+                </h3>
+                <div><%= blog.body.slice(0,300) %>..</div>
+            </div>
+        <% }); %>
+        </div>
+    </div>
 </body>
 </html>

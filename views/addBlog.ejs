@@ -4,14 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <%- include('style') -%>
+
 </head>
 <body>
-    <form method="POST">
-        <input type="text" name="title"  placeholder="enter title" /><br/>
-        <input type="text" name="body" placeholder="enter body"/><br/>
-        <input type="text" name="user" placeholder="user" /><br/>
-        <input type="text" name="dateandtime" placeholder="enter date and time"/><br/>
-        <input type="submit" value="POST" />
-    </form>
+    <div class="container">
+     
+        <h1>Add Your blog</h1>
+    
+        <form method="POST">
+            <input type="text" name="title"  placeholder="enter title" /><br/>
+            
+            <!-- <input type="text" name="body" placeholder="enter body"/> -->
+            <textarea name="body" id="" placeholder="enter your body" cols="30" rows="10"></textarea>
+            <br/>
+            <input type="text" name="user" placeholder="user" /><br/>
+            <input type="text" name="dateandtime" placeholder="enter date and time"/><br/>
+            <input type="submit" value="POST" />
+        </form>
+    </div>
 </body>
 </html>

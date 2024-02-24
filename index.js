@@ -23,6 +23,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(express.static(__dirname + '/style'));
 
 
 app.get("/addBlog",async (req,res)=>{
@@ -44,49 +45,23 @@ app.post("/addblog",async (req,res)=>{
     console.log(req.body)
     const data = await Blog.create(req.body)
     data.save()
-    res.render("addblog")
+    res.render("addBlog")
 })
 
 
 app.get("/",async (req,res)=>{
-    const data = {
-        // data:[
-        //     {
-        //         "name":"aman",
-        //         "class":"12"
-        //     },
-        //     {
-        //         "name":"arun",
-        //         "class":"11"
-        //     },
-        //     {
-        //         "name":"ankit",
-        //         "class":"20"
-        //     }                        
-        // ]
-
-    }
 
     const data1 = await Blog.find({})
-    // console.log(data1)
-    // res.json(data1)
-    // res.sendFile(path.join(__dirname, 'template/index.html'),{"blogs":data1});
     res.render("index",{blogs:data1})
-    // Blog.find({})
-    // .then((data)=>{
 
-    // })
-    // .catch(err=>{
-
-    // })
-
-    // res.json({"data":data1})
 })
 
 
-app.get("/blog/:blogname",(req,res)=>{
-    let myparams = req.params.blogname
-    res.send(`<h1>${myparams}</h1>`)
+app.get("/blog/:id",async (req,res)=>{
+    let blog_id = req.params.id
+    const res_ = await Blog.findById(blog_id)
+    // res.send(`<h1>${res_}</h1>`)
+    res.render("detail",{blog:res_})
 })
 
 app.get("/sum/:num1/:num2",(req,res)=>{
