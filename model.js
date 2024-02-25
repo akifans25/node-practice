@@ -5,6 +5,7 @@ import { Schema,model } from "mongoose";
 
 
 const blogSchema = new Schema({
+    _id: String,
     title: String,
     body: String,
     dateandtime: String,
