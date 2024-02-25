@@ -3,7 +3,8 @@ var app = express()
 import mongoose from "mongoose"
 import { Blog } from "./model.js";
 import path from "path"
-
+import route from "./api/index.js";
+import cors from "cors"
 const __dirname = path.resolve();
 
 mongoose.connect(
@@ -17,14 +18,20 @@ mongoose.connect(
 
 app.set('view engine', 'ejs');
 app.use(express.json());
+app.use(cors())
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/style'));
+app.use("/api",route)
+app.get("/addBlog",async (req,res)=>{
 
+    console.log("getting....")
+    // res.send(blog)
+    res.render("addBlog")
+})
 
 app.post("/addblog",async (req,res)=>{
     console.log("requesting........")
     console.log(req.body)
-    req.body._id = 10
     const data = await Blog.create(req.body)
     data.save()
     res.render("addBlog")
