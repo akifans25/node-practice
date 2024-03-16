@@ -26,15 +26,50 @@ app.get("/addBlog",async (req,res)=>{
 
     console.log("getting....")
     // res.send(blog)
-    res.render("addBlog")
+    res.render("addBlog",{type:"add"})
 })
+
+app.get("/edit/:id",async (req,res)=>{
+    console.log(req.params.id)
+    const data = await Blog.findById(req.params.id)
+    console.log(data)
+    res.render("addBlog",{data:data,"type":"edit"})
+})
+
+app.post("/edit/:id",async (req,res)=>{
+    // console.log(req.params.id)
+    // console.log(req.body)
+
+    // const data = await Blog.updateOne({id:req.params.id},{
+    //     title:req.body.title,
+    //     body:req.body.body,
+    //     dateandtime:req.body.dateandtime,
+    //     user:req.body.user        
+    // })
+    const data = await Blog.findById(req.params.id)
+
+    data.title = req.body.title
+    data.body = req.body.body
+    data.dateandtime = req.body.dateandtime
+    data.user  = req.body.user
+
+    data.save()
+    // console.log(data)
+    // data.acknowledged
+
+    // const data = await Blog.findById(req.params.id)
+    // console.log(data)
+    res.redirect(`/blog/${req.params.id}`)
+    // res.render("addBlog",{data:data,"type":"edit"})
+})
+
 
 app.post("/addblog",async (req,res)=>{
     console.log("requesting........")
     console.log(req.body)
     const data = await Blog.create(req.body)
     data.save()
-    res.render("addBlog")
+    res.render("addBlog",{type:"add"})
 })
 
 
